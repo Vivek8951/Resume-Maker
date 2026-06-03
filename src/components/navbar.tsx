@@ -35,19 +35,7 @@ export function Navbar() {
           <Link href="/analyze" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
             Upload Resume
           </Link>
-          <Link href="/templates" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Templates
-          </Link>
-          <Link href="/features" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Features
-          </Link>
-          <Link href="/pricing" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-            Pricing
-          </Link>
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-slate-200">
-            <Link href="/login" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Log in
-            </Link>
             <Link href="/editor" className={buttonVariants({ className: "rounded-full shadow-sm" })}>Build Resume</Link>
           </div>
         </nav>
@@ -72,11 +60,6 @@ export function Navbar() {
           >
             <div className="flex flex-col px-4 py-6 gap-4">
               <Link href="/analyze" className="text-base font-medium text-slate-600">Upload Resume</Link>
-              <Link href="/templates" className="text-base font-medium text-slate-600">Templates</Link>
-              <Link href="/features" className="text-base font-medium text-slate-600">Features</Link>
-              <Link href="/pricing" className="text-base font-medium text-slate-600">Pricing</Link>
-              <hr className="border-slate-100 my-2" />
-              <Link href="/login" className="text-base font-medium text-slate-600">Log in</Link>
               <Link href="/editor" className={buttonVariants({ className: "w-full mt-2" })}>Build Resume</Link>
             </div>
           </motion.div>

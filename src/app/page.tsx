@@ -48,9 +48,6 @@ export default function Home() {
                   <Link href="/analyze" className={buttonVariants({ size: "lg", variant: "secondary", className: "rounded-full h-14 px-8 text-base shadow-lg hover:shadow-xl transition-all" })}>
                     Upload & Analyze <Sparkles className="ml-2 w-5 h-5" />
                   </Link>
-                  <Link href="/templates" className={buttonVariants({ size: "lg", variant: "outline", className: "rounded-full h-14 px-8 text-base bg-white" })}>
-                    View Templates
-                  </Link>
                 </div>
                 <div className="mt-8 flex items-center justify-center gap-6 text-sm text-slate-500 font-medium">
                   <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-green-500" /> No credit card required</span>
@@ -98,54 +95,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Everything you need to land the interview
-              </h2>
-              <p className="text-lg text-slate-600">
-                Our platform combines premium design with advanced AI to give you the perfect edge.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { icon: Sparkles, title: "AI Content Generation", desc: "Say goodbye to writer's block. Our AI writes impactful bullet points tailored to your role." },
-                { icon: Shield, title: "ATS-Optimized Formats", desc: "Tested with major Applicant Tracking Systems to ensure your resume gets read by human eyes." },
-                { icon: Zap, title: "Real-time Preview", desc: "See your changes instantly. No more guessing what your exported PDF will look like." },
-              ].map((feature, i) => (
-                <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-6 border border-slate-100">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div className="col-span-2">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
+            <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <FileText className="w-6 h-6 text-white" />
                 <span className="font-serif font-bold text-xl text-white">ResumeForge AI</span>
               </Link>
-              <p className="max-w-sm">The premium AI resume builder for modern professionals. Land your dream job faster.</p>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Product</h4>
-              <ul className="space-y-2">
-                <li><Link href="/templates" className="hover:text-white transition-colors">Templates</Link></li>
-                <li><Link href="/features" className="hover:text-white transition-colors">Features</Link></li>
-                <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
-              </ul>
+              <p className="max-w-sm text-sm">The premium AI resume builder for modern professionals. Land your dream job faster.</p>
             </div>
           </div>
           <div className="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center">
