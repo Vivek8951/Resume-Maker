@@ -35,7 +35,11 @@ export function Navbar() {
           <Link href="/analyze" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
             Upload Resume
           </Link>
+          <Link href="/templates" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+            Templates
+          </Link>
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-slate-200">
+            <Link href="/templates" className={buttonVariants({ variant: "outline", className: "rounded-full" })}>View Templates</Link>
             <Link href="/editor" className={buttonVariants({ className: "rounded-full shadow-sm" })}>Build Resume</Link>
           </div>
         </nav>
