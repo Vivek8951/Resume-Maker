@@ -237,10 +237,14 @@ export default function Editor() {
                         <Label>Marks / Percentage / CGPA</Label>
                         <Input value={item.marks} onChange={e => updateArrayItem("education", idx, "marks", e.target.value)} />
                       </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <Label>Certificate / Document Link (Optional)</Label>
+                        <Input value={item.certificateUrl || ""} onChange={e => updateArrayItem("education", idx, "certificateUrl", e.target.value)} placeholder="https://..." />
+                      </div>
                     </div>
                   </div>
                 ))}
-                <Button className="w-full" variant="outline" onClick={() => addArrayItem("education", { degree: "", school: "", board: "", date: "", marks: "" })}>
+                <Button className="w-full" variant="outline" onClick={() => addArrayItem("education", { degree: "", school: "", board: "", date: "", marks: "", certificateUrl: "" })}>
                   <Plus className="w-4 h-4 mr-2" /> Add Education
                 </Button>
               </div>
@@ -273,6 +277,10 @@ export default function Editor() {
                           onChange={(val) => updateArrayItem("experience", idx, "date", val)}
                         />
                       </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <Label>Certificate / Document Link (Optional)</Label>
+                        <Input value={item.certificateUrl || ""} onChange={e => updateArrayItem("experience", idx, "certificateUrl", e.target.value)} placeholder="https://..." />
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
@@ -297,7 +305,7 @@ export default function Editor() {
                     </div>
                   </div>
                 ))}
-                <Button className="w-full" variant="outline" onClick={() => addArrayItem("experience", { title: "", company: "", location: "", date: "", description: "" })}>
+                <Button className="w-full" variant="outline" onClick={() => addArrayItem("experience", { title: "", company: "", location: "", date: "", description: "", certificateUrl: "" })}>
                   <Plus className="w-4 h-4 mr-2" /> Add Experience
                 </Button>
               </div>
@@ -384,10 +392,35 @@ export default function Editor() {
                           onChange={(val) => updateArrayItem("trainings", idx, "date", val)}
                         />
                       </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <Label>Certificate / Credential Link (Optional)</Label>
+                        <Input value={item.certificateUrl || ""} onChange={e => updateArrayItem("trainings", idx, "certificateUrl", e.target.value)} placeholder="https://..." />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Label>Description (Optional)</Label>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="xs"
+                          disabled={enhancingFields[`trainings_${idx}_description`]}
+                          onClick={() => enhanceText("trainings", idx, "description", item.description || "", "experience")}
+                          className="border-primary/20 text-primary hover:bg-primary/5 gap-1 font-semibold"
+                        >
+                          {enhancingFields[`trainings_${idx}_description`] ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                          )}
+                          {enhancingFields[`trainings_${idx}_description`] ? "Enhancing..." : "Enhance with AI"}
+                        </Button>
+                      </div>
+                      <Textarea className="h-24" value={item.description || ""} onChange={e => updateArrayItem("trainings", idx, "description", e.target.value)} placeholder="Describe what you learned, key topics covered, or projects completed..." />
                     </div>
                   </div>
                 ))}
-                <Button className="w-full" variant="outline" onClick={() => addArrayItem("trainings", { title: "", company: "", location: "", date: "" })}>
+                <Button className="w-full" variant="outline" onClick={() => addArrayItem("trainings", { title: "", company: "", location: "", date: "", certificateUrl: "", description: "" })}>
                   <Plus className="w-4 h-4 mr-2" /> Add Training
                 </Button>
               </div>

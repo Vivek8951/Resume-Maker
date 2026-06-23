@@ -13,6 +13,7 @@ export interface ResumeData {
     board: string;
     date: string;
     marks: string;
+    certificateUrl?: string;
   }>;
   experience: Array<{
     id: string;
@@ -21,6 +22,7 @@ export interface ResumeData {
     location: string;
     date: string;
     description: string;
+    certificateUrl?: string;
   }>;
   trainings: Array<{
     id: string;
@@ -28,6 +30,8 @@ export interface ResumeData {
     company: string;
     location: string;
     date: string;
+    certificateUrl?: string;
+    description?: string;
   }>;
   projects: Array<{
     id: string;
@@ -59,6 +63,7 @@ export const initialData: ResumeData = {
       board: "",
       date: "2018 - 2022",
       marks: "GPA: 3.8/4.0",
+      certificateUrl: "",
     }
   ],
   experience: [
@@ -69,6 +74,7 @@ export const initialData: ResumeData = {
       location: "San Francisco, CA",
       date: "2022 - Present",
       description: "Led a team of 5 developers to create a new scalable cloud-based architecture. Improved application performance by 40% and reduced server costs by 15%.",
+      certificateUrl: "",
     }
   ],
   trainings: [],

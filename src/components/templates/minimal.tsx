@@ -33,7 +33,14 @@ export function MinimalTemplate({ data }: { data: ResumeData }) {
             {data.experience.map((exp) => (
               <div key={exp.id} className="break-inside-avoid">
                 <div className="flex justify-between items-baseline mb-1">
-                  <h3 className="font-semibold text-gray-900 text-base">{exp.title}</h3>
+                  <h3 className="font-semibold text-gray-900 text-base">
+                    {exp.title}
+                    {exp.certificateUrl && (
+                      <a href={exp.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline text-xs font-normal ml-2 print:text-blue-500">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
                   <span className="text-sm text-gray-500">{exp.date}</span>
                 </div>
                 <div className="text-sm font-medium text-gray-600 mb-2">
@@ -58,11 +65,50 @@ export function MinimalTemplate({ data }: { data: ResumeData }) {
             {data.education.map((edu) => (
               <div key={edu.id} className="flex justify-between items-baseline break-inside-avoid">
                 <div>
-                  <h3 className="font-semibold text-gray-900 text-base">{edu.degree}</h3>
+                  <h3 className="font-semibold text-gray-900 text-base">
+                    {edu.degree}
+                    {edu.certificateUrl && (
+                      <a href={edu.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline text-xs font-normal ml-2 print:text-blue-500">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
                   <div className="text-sm text-gray-600">{edu.school} {edu.board && `• ${edu.board}`}</div>
                   {edu.marks && <div className="text-sm text-gray-500 mt-1">{edu.marks}</div>}
                 </div>
                 <span className="text-sm text-gray-500">{edu.date}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Trainings/Courses */}
+      {data.trainings && data.trainings.length > 0 && (
+        <section className="mb-6">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 border-b border-gray-200 pb-2 mb-3">
+            Trainings & Certifications
+          </h2>
+          <div className="flex flex-col gap-3">
+            {data.trainings.map((trn) => (
+              <div key={trn.id} className="break-inside-avoid">
+                <div className="flex justify-between items-baseline mb-1">
+                  <h3 className="font-semibold text-gray-900 text-base">
+                    {trn.title}
+                    {trn.certificateUrl && (
+                      <a href={trn.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline text-xs font-normal ml-2 print:text-blue-500">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
+                  <span className="text-sm text-gray-500">{trn.date}</span>
+                </div>
+                <div className="text-sm font-medium text-gray-600 mb-1">
+                  {trn.company} {trn.location && `• ${trn.location}`}
+                </div>
+                {trn.description && (
+                  <p className="text-sm text-gray-600 whitespace-pre-wrap">{trn.description}</p>
+                )}
               </div>
             ))}
           </div>

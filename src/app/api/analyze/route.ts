@@ -40,7 +40,8 @@ export async function POST(req: Request) {
             "school": "string",
             "board": "string (optional)",
             "date": "string (e.g. 2020 - 2024)",
-            "marks": "string (e.g. CGPA: 3.8/4.0)"
+            "marks": "string (e.g. CGPA: 3.8/4.0)",
+            "certificateUrl": "string (optional url to degree/transcript/certificate)"
           }
         ],
         "experience": [
@@ -50,7 +51,8 @@ export async function POST(req: Request) {
             "company": "string",
             "location": "string",
             "date": "string (e.g. Jan 2022 - Present)",
-            "description": "string (bullet points or paragraph of what they did)"
+            "description": "string (bullet points or paragraph of what they did)",
+            "certificateUrl": "string (optional url to internship/work certificate)"
           }
         ],
         "trainings": [
@@ -59,7 +61,9 @@ export async function POST(req: Request) {
             "title": "string",
             "company": "string",
             "location": "string",
-            "date": "string"
+            "date": "string",
+            "certificateUrl": "string (optional url to course/training certificate)",
+            "description": "string (optional training/course description or topics covered)"
           }
         ],
         "projects": [

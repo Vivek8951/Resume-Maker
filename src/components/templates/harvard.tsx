@@ -31,7 +31,14 @@ export function HarvardTemplate({ data }: { data: ResumeData }) {
             <div className="w-3/4 flex flex-col gap-2">
               {data.education.map((edu) => (
                 <div key={edu.id} className="break-inside-avoid">
-                  <h3 className="font-bold text-black text-[11pt]">{edu.degree}</h3>
+                  <h3 className="font-bold text-black text-[11pt]">
+                    {edu.degree}
+                    {edu.certificateUrl && (
+                      <a href={edu.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-[9pt] font-normal ml-2 print:text-blue-600">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
                   <div className="text-slate-600">{edu.school}</div>
                   {edu.board && <div className="text-slate-600">{edu.board}</div>}
                   <div className="text-slate-500">{edu.date}</div>
@@ -53,7 +60,14 @@ export function HarvardTemplate({ data }: { data: ResumeData }) {
             <div className="w-3/4 flex flex-col gap-3">
               {data.experience.map((exp) => (
                 <div key={exp.id} className="break-inside-avoid">
-                  <h3 className="font-bold text-black text-[11pt]">{exp.title}</h3>
+                  <h3 className="font-bold text-black text-[11pt]">
+                    {exp.title}
+                    {exp.certificateUrl && (
+                      <a href={exp.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-[9pt] font-normal ml-2 print:text-blue-600">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
                   <div className="text-slate-600">{exp.company}</div>
                   {exp.location && <div className="text-slate-600">{exp.location}</div>}
                   <div className="text-slate-500">{exp.date}</div>
@@ -77,10 +91,20 @@ export function HarvardTemplate({ data }: { data: ResumeData }) {
             <div className="w-3/4 flex flex-col gap-2">
               {data.trainings.map((trn) => (
                 <div key={trn.id} className="break-inside-avoid">
-                  <h3 className="font-bold text-black text-[11pt]">{trn.title}</h3>
+                  <h3 className="font-bold text-black text-[11pt]">
+                    {trn.title}
+                    {trn.certificateUrl && (
+                      <a href={trn.certificateUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-[9pt] font-normal ml-2 print:text-blue-600">
+                        [Certificate]
+                      </a>
+                    )}
+                  </h3>
                   <div className="text-slate-600">{trn.company}</div>
                   {trn.location && <div className="text-slate-600">{trn.location}</div>}
                   <div className="text-slate-500">{trn.date}</div>
+                  {trn.description && (
+                    <p className="text-slate-600 mt-1 whitespace-pre-wrap">{trn.description}</p>
+                  )}
                 </div>
               ))}
             </div>
