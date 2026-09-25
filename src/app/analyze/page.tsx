@@ -115,6 +115,7 @@ export default function AnalyzePage() {
           email: emailMatch ? emailMatch[0] : "",
           phone: phoneMatch ? phoneMatch[0] : "",
           github: "",
+          linkedin: "",
           summary: summaryText || "No summary extracted. Please check your HUGGINGFACE_API_KEY.",
         },
         education: [
@@ -140,8 +141,9 @@ export default function AnalyzePage() {
         trainings: [],
         projects: [],
         skills: [
-          { id: "1", name: "Communication", level: "Advanced" },
-        ]
+          { id: "1", name: "Communication" },
+        ],
+        certifications: []
       });
     }
 

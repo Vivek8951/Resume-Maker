@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     `;
 
     const response = await hf.chatCompletion({
-      model: "meta-llama/Meta-Llama-3-8B-Instruct",
+      model: "Qwen/Qwen2.5-72B-Instruct",
       messages: [
         {
           role: "system",

@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { 
   User, Briefcase, GraduationCap, Code, 
   Settings, Download, Home, FileText, ChevronLeft, LayoutTemplate,
-  Plus, Trash2, UploadCloud, Sparkles, Loader2
+  Plus, Trash2, UploadCloud, Sparkles, Loader2, Award
 } from "lucide-react";
 import Link from "next/link";
 import { HarvardTemplate } from "@/components/templates/harvard";
@@ -17,7 +17,7 @@ import { MinimalTemplate } from "@/components/templates/minimal";
 import { ResumeData, initialData } from "@/lib/types";
 import { useReactToPrint } from "react-to-print";
 
-type Section = "personal" | "education" | "experience" | "trainings" | "projects" | "skills";
+type Section = "personal" | "education" | "experience" | "trainings" | "projects" | "skills" | "certifications";
 
 export default function Editor() {
   const [activeSection, setActiveSection] = useState<Section>("personal");
@@ -95,7 +95,7 @@ export default function Editor() {
 
   const updateArrayItem = (section: keyof ResumeData, index: number, field: string, value: string) => {
     setData(prev => {
-      const arr = [...(prev[section] as any[])];
+      const arr = [...(prev[section] as any[] || [])];
       arr[index] = { ...arr[index], [field]: value };
       return { ...prev, [section]: arr };
     });
@@ -104,13 +104,13 @@ export default function Editor() {
   const addArrayItem = (section: keyof ResumeData, defaultItem: any) => {
     setData(prev => ({
       ...prev,
-      [section]: [...(prev[section] as any[]), { ...defaultItem, id: Date.now().toString() }]
+      [section]: [...(prev[section] as any[] || []), { ...defaultItem, id: Date.now().toString() }]
     }));
   };
 
   const removeArrayItem = (section: keyof ResumeData, index: number) => {
     setData(prev => {
-      const arr = [...(prev[section] as any[])];
+      const arr = [...(prev[section] as any[] || [])];
       arr.splice(index, 1);
       return { ...prev, [section]: arr };
     });
@@ -136,6 +136,7 @@ export default function Editor() {
           <NavButton icon={<FileText className="w-5 h-5" />} label="Trainings" isActive={activeSection === "trainings"} onClick={() => setActiveSection("trainings")} />
           <NavButton icon={<LayoutTemplate className="w-5 h-5" />} label="Projects" isActive={activeSection === "projects"} onClick={() => setActiveSection("projects")} />
           <NavButton icon={<Code className="w-5 h-5" />} label="Skills" isActive={activeSection === "skills"} onClick={() => setActiveSection("skills")} />
+          <NavButton icon={<Award className="w-5 h-5" />} label="Certifications" isActive={activeSection === "certifications"} onClick={() => setActiveSection("certifications")} />
         </nav>
 
         <div className="p-3 border-t border-slate-100 shrink-0 space-y-2">
@@ -178,9 +179,15 @@ export default function Editor() {
                     <Input value={data.personal.phone} onChange={e => updatePersonal("phone", e.target.value)} />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label>GitHub / Portfolio Link</Label>
-                  <Input value={data.personal.github} onChange={e => updatePersonal("github", e.target.value)} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>GitHub Link</Label>
+                    <Input value={data.personal.github} onChange={e => updatePersonal("github", e.target.value)} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>LinkedIn Link (Optional)</Label>
+                    <Input value={data.personal.linkedin || ""} onChange={e => updatePersonal("linkedin", e.target.value)} placeholder="https://linkedin.com/in/..." />
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -429,35 +436,61 @@ export default function Editor() {
             {activeSection === "skills" && (
               <div className="space-y-6">
                 <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {data.skills.map((item, idx) => (
                       <div key={item.id} className="flex gap-2 items-end">
                         <div className="flex-1 space-y-1">
                           <Label className="text-xs">Skill</Label>
-                          <Input value={item.name} onChange={e => updateArrayItem("skills", idx, "name", e.target.value)} />
+                          <Input 
+                            value={item.name} 
+                            placeholder="e.g. React"
+                            onChange={e => updateArrayItem("skills", idx, "name", e.target.value)} 
+                          />
                         </div>
-                        <div className="flex-1 space-y-1">
-                          <Label className="text-xs">Level</Label>
-                          <select 
-                            value={item.level} 
-                            onChange={e => updateArrayItem("skills", idx, "level", e.target.value)}
-                            className="w-full h-9 px-3 py-1 rounded-md border border-slate-200 bg-white text-xs focus:outline-none focus:ring-1 focus:ring-primary"
-                          >
-                            <option value="">Select Level</option>
-                            <option value="Beginner">Beginner</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Advanced">Advanced</option>
-                            <option value="Expert">Expert</option>
-                          </select>
-                        </div>
-                        <Button variant="ghost" size="icon" className="text-red-500 mb-0.5 shrink-0" onClick={() => removeArrayItem("skills", idx)}>
+                        <Button variant="ghost" size="icon" className="text-red-500 mb-0.5 shrink-0 hover:bg-red-50" onClick={() => removeArrayItem("skills", idx)}>
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full mt-4" variant="outline" onClick={() => addArrayItem("skills", { name: "", level: "" })}>
+                  <Button className="w-full mt-4" variant="outline" onClick={() => addArrayItem("skills", { name: "" })}>
                     <Plus className="w-4 h-4 mr-2" /> Add Skill
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {activeSection === "certifications" && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  {(data.certifications || []).map((item, idx) => (
+                    <div key={item.id} className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative group">
+                      <Button variant="ghost" size="icon" className="absolute top-2 right-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => removeArrayItem("certifications", idx)}>
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label>Certificate Name</Label>
+                          <Input value={item.name} onChange={e => updateArrayItem("certifications", idx, "name", e.target.value)} placeholder="e.g. AWS Certified Solutions Architect" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Issuing Organization</Label>
+                          <Input value={item.issuer} onChange={e => updateArrayItem("certifications", idx, "issuer", e.target.value)} placeholder="e.g. Amazon Web Services" />
+                        </div>
+                      </div>
+                      <div className="space-y-2 mt-4">
+                        <Label>Certificate Summary / Details</Label>
+                        <Textarea 
+                          value={item.summary || ""} 
+                          onChange={e => updateArrayItem("certifications", idx, "summary", e.target.value)} 
+                          placeholder="Briefly describe what topics or skills this certification verified..." 
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  <Button className="w-full" variant="outline" onClick={() => addArrayItem("certifications", { name: "", issuer: "" })}>
+                    <Plus className="w-4 h-4 mr-2" /> Add Certification
                   </Button>
                 </div>
               </div>

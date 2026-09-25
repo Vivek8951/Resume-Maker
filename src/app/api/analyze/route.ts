@@ -31,6 +31,7 @@ export async function POST(req: Request) {
           "email": "string",
           "phone": "string",
           "github": "string (optional)",
+          "linkedin": "string (optional)",
           "summary": "string (a professional summary extracted or generated based on their experience)"
         },
         "education": [
@@ -78,8 +79,14 @@ export async function POST(req: Request) {
         "skills": [
           {
             "id": "string",
+            "name": "string"
+          }
+        ],
+        "certifications": [
+          {
+            "id": "string",
             "name": "string",
-            "level": "Beginner | Intermediate | Advanced"
+            "issuer": "string"
           }
         ]
       }
@@ -91,7 +98,7 @@ export async function POST(req: Request) {
     `;
 
     const response = await hf.chatCompletion({
-      model: "meta-llama/Meta-Llama-3-8B-Instruct",
+      model: "Qwen/Qwen2.5-72B-Instruct",
       messages: [
         {
           role: "system",
